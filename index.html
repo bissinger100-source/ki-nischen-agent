@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf7f2;
-    --surface: #ffffff;
-    --surface2: #f5efe8;
-    --border: #e8ddd2;
-    --accent: #c4704a;
-    --accent2: #8b5e3c;
-    --accent3: #6b8f6b;
-    --text: #2d2420;
-    --muted: #8b7355;
-    --card: #ffffff;
+    --bg: #0f1623;
+    --surface: #1a2333;
+    --surface2: #243044;
+    --border: #2e3f57;
+    --accent: #4f9ef8;
+    --accent2: #2d7dd2;
+    --accent3: #56c596;
+    --text: #e8f0fc;
+    --muted: #7a93b4;
+    --card: #1a2333;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,8 +34,8 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 20% 10%, rgba(196,112,74,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(139,94,60,0.05) 0%, transparent 70%);
+      radial-gradient(ellipse 60% 50% at 20% 10%, rgba(79,158,248,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(45,125,210,0.05) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -59,8 +59,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(196,112,74,0.1);
-    border: 1px solid rgba(196,112,74,0.3);
+    background: rgba(79,158,248,0.1);
+    border: 1px solid rgba(79,158,248,0.3);
     color: var(--accent);
     font-size: 12px;
     font-weight: 500;
@@ -131,7 +131,7 @@
   .step-circle {
     width: 32px; height: 32px;
     border-radius: 50%;
-    border: 1.5px solid #d4c5b5;
+    border: 1.5px solid #2e3f57;
     background: var(--surface);
     display: flex; align-items: center; justify-content: center;
     font-size: 12px; font-weight: 600;
@@ -143,14 +143,14 @@
 
   .progress-step.active .step-circle {
     border-color: var(--accent);
-    background: rgba(196,112,74,0.12);
+    background: rgba(79,158,248,0.12);
     color: var(--accent);
-    box-shadow: 0 0 16px rgba(196,112,74,0.2);
+    box-shadow: 0 0 16px rgba(79,158,248,0.2);
   }
 
   .progress-step.done .step-circle {
     border-color: var(--accent3);
-    background: rgba(107,143,107,0.15);
+    background: rgba(86,197,150,0.15);
     color: var(--accent3);
   }
 
@@ -174,7 +174,7 @@
     padding: 32px;
     margin-bottom: 20px;
     animation: fadeUp 0.5s ease both;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
   }
 
   .card-title {
@@ -219,7 +219,7 @@
     align-items: flex-start;
     gap: 14px;
     padding: 14px 18px;
-    border: 1.5px solid #d4c5b5;
+    border: 1.5px solid #2e3f57;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s;
@@ -227,14 +227,14 @@
   }
 
   .option:hover {
-    border-color: rgba(196,112,74,0.5);
-    background: rgba(196,112,74,0.06);
+    border-color: rgba(79,158,248,0.5);
+    background: rgba(79,158,248,0.06);
     transform: translateX(4px);
   }
 
   .option.selected {
     border-color: var(--accent);
-    background: rgba(196,112,74,0.08);
+    background: rgba(79,158,248,0.08);
   }
 
   .option-letter {
@@ -269,7 +269,7 @@
   textarea, input[type="text"] {
     width: 100%;
     background: var(--surface);
-    border: 1.5px solid #d4c5b5;
+    border: 1.5px solid #2e3f57;
     border-radius: 12px;
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
@@ -283,7 +283,7 @@
   textarea:focus, input[type="text"]:focus {
     border-color: var(--accent);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(196,112,74,0.1);
+    box-shadow: 0 0 0 3px rgba(79,158,248,0.1);
   }
 
   textarea::placeholder, input::placeholder { color: var(--muted); }
@@ -307,14 +307,14 @@
   .btn-primary {
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     color: white;
-    box-shadow: 0 8px 24px rgba(196,112,74,0.25);
+    box-shadow: 0 8px 24px rgba(79,158,248,0.25);
     width: 100%;
     justify-content: center;
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(196,112,74,0.35);
+    box-shadow: 0 12px 32px rgba(79,158,248,0.35);
   }
 
   .btn-primary:disabled {
@@ -369,7 +369,7 @@
 
   .ai-icon {
     width: 20px; height: 20px;
-    background: rgba(196,112,74,0.12);
+    background: rgba(79,158,248,0.12);
     border-radius: 6px;
     display: flex; align-items: center; justify-content: center;
     font-size: 12px;
@@ -460,7 +460,7 @@
 
   .niche-card:hover, .niche-card.selected {
     border-color: var(--accent);
-    background: rgba(196,112,74,0.1);
+    background: rgba(79,158,248,0.1);
   }
 
   .niche-name {
@@ -484,9 +484,9 @@
     border-radius: 100px;
     font-size: 11px;
     font-weight: 600;
-    background: rgba(196,112,74,0.12);
+    background: rgba(79,158,248,0.12);
     color: var(--accent);
-    border: 1px solid rgba(196,112,74,0.2);
+    border: 1px solid rgba(79,158,248,0.2);
   }
 
   /* Content ideas */
@@ -500,12 +500,12 @@
   }
 
   .content-idea:last-child { border-bottom: none; }
-  .content-idea:hover { background: rgba(196,112,74,0.04); }
+  .content-idea:hover { background: rgba(79,158,248,0.04); }
 
   .idea-num {
     width: 24px; height: 24px;
     border-radius: 6px;
-    background: rgba(196,112,74,0.12);
+    background: rgba(79,158,248,0.12);
     color: var(--accent);
     font-size: 11px;
     font-weight: 700;
@@ -518,8 +518,8 @@
 
   /* CTA Banner */
   .cta-banner {
-    background: linear-gradient(135deg, rgba(196,112,74,0.1), rgba(139,94,60,0.08));
-    border: 1px solid rgba(196,112,74,0.25);
+    background: linear-gradient(135deg, rgba(79,158,248,0.1), rgba(45,125,210,0.08));
+    border: 1px solid rgba(79,158,248,0.25);
     border-radius: 20px;
     padding: 32px;
     text-align: center;
@@ -563,14 +563,14 @@
     font-weight: 600;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     color: white;
-    box-shadow: 0 8px 24px rgba(196,112,74,0.3);
+    box-shadow: 0 8px 24px rgba(79,158,248,0.3);
     transition: all 0.2s;
     text-decoration: none;
   }
 
   .btn-cta:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 40px rgba(196,112,74,0.4);
+    box-shadow: 0 16px 40px rgba(79,158,248,0.4);
   }
 
   /* Animations */
@@ -639,8 +639,8 @@
     display: inline-block;
   }
 
-  .phase-1 { background: rgba(196,112,74,0.12); color: var(--accent); }
-  .phase-2 { background: rgba(107,143,107,0.15); color: var(--accent3); }
+  .phase-1 { background: rgba(79,158,248,0.12); color: var(--accent); }
+  .phase-2 { background: rgba(86,197,150,0.15); color: var(--accent3); }
 </style>
 </head>
 <body>
@@ -848,7 +848,7 @@
 
   <!-- RESULT -->
   <div class="hidden" id="resultSection">
-    <div class="card" style="border-color: rgba(196,112,74,0.3);">
+    <div class="card" style="border-color: rgba(79,158,248,0.3);">
       <div class="ai-label">
         <div class="ai-icon">🤖</div>
         KI-Analyse · Dein persönliches Ergebnis
@@ -867,7 +867,7 @@
         <!-- Nischen -->
         <div class="result-section" id="nicheSection">
           <div class="result-header">
-            <div class="result-icon" style="background:rgba(196,112,74,0.12);">🎯</div>
+            <div class="result-icon" style="background:rgba(79,158,248,0.12);">🎯</div>
             Deine Top-3 Nischen
           </div>
           <div class="niche-grid" id="nicheGrid"></div>
