@@ -992,10 +992,11 @@ Antworte mit genau diesem JSON (keine Backticks, kein Text außenrum):
 
     const data = await response.json();
     const text = data.content.map(i => i.text || '').join('').trim();
-    const clean = text.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-    // Extrahiere nur den JSON-Teil falls Text davor/danach
+    // Entferne Backticks und finde JSON
+    const clean = text.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/g, '').trim();
     const jsonMatch = clean.match(/\{[\s\S]*\}/);
-    const result = JSON.parse(jsonMatch ? jsonMatch[0] : clean);
+    if (!jsonMatch) throw new Error('No JSON found');
+    const result = JSON.parse(jsonMatch[0]);
 
     renderResult(result);
   } catch (err) {
