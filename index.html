@@ -964,7 +964,9 @@ async function generateResult() {
   document.getElementById('ps5').classList.remove('active');
   document.getElementById('ps5').classList.add('done');
 
-  const prompt = `Du bist ein erfahrener Online-Business-Stratege. Analysiere folgende Antworten eines Nutzers und erstelle ein strukturiertes Ergebnis auf Deutsch.
+  const prompt = `Du bist ein neutraler Content-Stratege ohne Vorlieben für ein bestimmtes Thema. Deine Aufgabe: Analysiere die Angaben des Nutzers und finde die 3 passendsten Nischen — basierend AUSSCHLIESSLICH auf seinen echten Fähigkeiten, Interessen und seiner Zielgruppe.
+
+WICHTIGE REGEL: Empfehle KEINE Nischen die nicht direkt aus den Antworten des Nutzers hervorgehen. Wenn jemand Kochen als Stärke angibt, empfiehl Kochen. Wenn jemand Sport angibt, empfiehl Sport. Erfinde keine Nischen im Bereich Geld, KI oder Business wenn der Nutzer das nicht angegeben hat.
 
 NUTZERPROFIL:
 - Stärke/Fähigkeit: ${answers.q1}
