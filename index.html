@@ -964,75 +964,19 @@ async function generateResult() {
   document.getElementById('ps5').classList.remove('active');
   document.getElementById('ps5').classList.add('done');
 
-  const prompt = `Du bist ein neutraler Content-Stratege ohne Vorlieben für ein bestimmtes Thema. Deine Aufgabe: Analysiere die Angaben des Nutzers und finde die 3 passendsten Nischen — basierend AUSSCHLIESSLICH auf seinen echten Fähigkeiten, Interessen und seiner Zielgruppe.
+  const prompt = `Du bist ein neutraler Content-Stratege. Analysiere das Nutzerprofil und antworte NUR mit validem JSON.
 
-WICHTIGE REGEL: Empfehle KEINE Nischen die nicht direkt aus den Antworten des Nutzers hervorgehen. Wenn jemand Kochen als Stärke angibt, empfiehl Kochen. Wenn jemand Sport angibt, empfiehl Sport. Erfinde keine Nischen im Bereich Geld, KI oder Business wenn der Nutzer das nicht angegeben hat.
+ABSOLUTE REGEL: Leite die Nischen DIREKT aus der genannten Stärke/Fähigkeit ab. Wenn jemand "Kochen" angibt → Nischen rund um Kochen. Wenn "Sport" → Nischen rund um Sport. NIEMALS Geld, KI, Affiliate oder Business empfehlen wenn der Nutzer das nicht explizit als Stärke angegeben hat.
 
-NUTZERPROFIL:
-- Stärke/Fähigkeit: ${answers.q1}
-- Erfahrungslevel: ${answers.q2}
-- Wunsch-Zielgruppe: ${answers.q3}
-- Bevorzugte Plattform: ${answers.q4}
-- 90-Tage-Ziel: ${answers.q5}
+Nutzerprofil:
+Stärke: ${answers.q1}
+Erfahrung: ${answers.q2}
+Zielgruppe: ${answers.q3}
+Plattform: ${answers.q4}
+Ziel: ${answers.q5}
 
-Erstelle eine Analyse im folgenden JSON-Format (NUR JSON, kein Text davor oder danach, keine Markdown-Backticks):
-
-{
-  "niches": [
-    {
-      "name": "Nischenname (kurz, maximal 4 Wörter)",
-      "description": "2 Sätze warum diese Nische perfekt passt",
-      "potential": "Hoch/Mittel",
-      "tag": "z.B. Wenig Konkurrenz oder Hohe Kaufkraft"
-    },
-    {
-      "name": "Zweite Nische",
-      "description": "2 Sätze",
-      "potential": "Hoch",
-      "tag": "Tag"
-    },
-    {
-      "name": "Dritte Nische",
-      "description": "2 Sätze",
-      "potential": "Mittel",
-      "tag": "Tag"
-    }
-  ],
-  "positioning": "3-4 Sätze: Konkrete Positionierungsempfehlung. Wie soll sich der Nutzer auf der Plattform präsentieren? Was ist sein USP? Welche Botschaft soll er kommunizieren?",
-  "contentIdeas": [
-    "Video-Titel oder Post-Idee 1",
-    "Video-Titel oder Post-Idee 2",
-    "Video-Titel oder Post-Idee 3",
-    "Video-Titel oder Post-Idee 4",
-    "Video-Titel oder Post-Idee 5",
-    "Video-Titel oder Post-Idee 6",
-    "Video-Titel oder Post-Idee 7",
-    "Video-Titel oder Post-Idee 8",
-    "Video-Titel oder Post-Idee 9",
-    "Video-Titel oder Post-Idee 10",
-    "Video-Titel oder Post-Idee 11",
-    "Video-Titel oder Post-Idee 12",
-    "Video-Titel oder Post-Idee 13",
-    "Video-Titel oder Post-Idee 14",
-    "Video-Titel oder Post-Idee 15",
-    "Video-Titel oder Post-Idee 16",
-    "Video-Titel oder Post-Idee 17",
-    "Video-Titel oder Post-Idee 18",
-    "Video-Titel oder Post-Idee 19",
-    "Video-Titel oder Post-Idee 20",
-    "Video-Titel oder Post-Idee 21",
-    "Video-Titel oder Post-Idee 22",
-    "Video-Titel oder Post-Idee 23",
-    "Video-Titel oder Post-Idee 24",
-    "Video-Titel oder Post-Idee 25",
-    "Video-Titel oder Post-Idee 26",
-    "Video-Titel oder Post-Idee 27",
-    "Video-Titel oder Post-Idee 28",
-    "Video-Titel oder Post-Idee 29",
-    "Video-Titel oder Post-Idee 30"
-  ],
-  "hooks": "5 bewährte Hook-Formeln als nummerierte Liste (1. 2. 3. 4. 5.) speziell für die Nische und Plattform des Nutzers. Jede Hook-Formel als konkretes Beispiel formuliert."
-}`;
+Antworte NUR mit diesem JSON (kein Text davor/danach, keine Backticks):
+{"niches":[{"name":"Name max 4 Wörter","description":"Warum diese Nische zur Stärke ${answers.q1} passt in 2 Sätzen","potential":"Hoch","tag":"Kurzes Merkmal"},{"name":"Zweite Nische passend zu ${answers.q1}","description":"2 Sätze","potential":"Hoch","tag":"Merkmal"},{"name":"Dritte Nische passend zu ${answers.q1}","description":"2 Sätze","potential":"Mittel","tag":"Merkmal"}],"positioning":"2-3 Sätze wie sich der Nutzer auf ${answers.q4} mit der Stärke ${answers.q1} positionieren soll.","contentIdeas":["Idee 1 passend zu ${answers.q1}","Idee 2","Idee 3","Idee 4","Idee 5","Idee 6","Idee 7","Idee 8","Idee 9","Idee 10","Idee 11","Idee 12","Idee 13","Idee 14","Idee 15"],"hooks":"1. Hook-Formel für ${answers.q1} auf ${answers.q4}\n2. Hook-Formel\n3. Hook-Formel\n4. Hook-Formel\n5. Hook-Formel"}`;
 
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -1040,7 +984,7 @@ Erstelle eine Analyse im folgenden JSON-Format (NUR JSON, kein Text davor oder d
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
+        max_tokens: 4000,
         messages: [{ role: "user", content: prompt }]
       })
     });
