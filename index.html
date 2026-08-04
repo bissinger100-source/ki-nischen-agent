@@ -964,17 +964,20 @@ async function generateResult() {
 
   const prompt = `Du bist ein neutraler Content-Stratege. Analysiere das Nutzerprofil und antworte NUR mit validem JSON ohne Backticks.
 
-WICHTIGSTE REGEL: Die 3 Nischen müssen 100% zur Stärke "${answers.q1}" passen. Keine Business-, KI- oder Geld-Nischen außer der Nutzer hat das als Stärke angegeben.
+STRENGE REGEL: Die Nischen basieren AUSSCHLIESSLICH auf der Stärke "${answers.q1}". Die Zielgruppe "${answers.q3}" zeigt nur WEM du hilfst — nicht WAS deine Nische ist.
+
+Beispiel: Stärke=Kochen, Zielgruppe=Eltern → Nischen sind "Familienrezepte", "Schnelle Kinderküche", "Meal Prep für Familien" — NICHT "Eltern die Geld verdienen".
+
+VERBOTEN: Business, Online-Business, Geld verdienen, KI-Tools, Affiliate Marketing, Digitale Produkte — außer "${answers.q1}" enthält explizit diese Begriffe.
 
 Nutzerprofil:
-- Stärke: ${answers.q1}
-- Erfahrung: ${answers.q2}
-- Zielgruppe: ${answers.q3}
+- Stärke (Basis der Nischen): ${answers.q1}
+- Zielgruppe (wem du hilfst): ${answers.q3}
 - Plattform: ${answers.q4}
 - Ziel: ${answers.q5}
 
-Antworte mit genau diesem JSON-Format:
-{"niches":[{"name":"[Nische 1 passend zu ${answers.q1}]","description":"[2 Sätze warum diese Nische zu ${answers.q1} passt]","potential":"Hoch","tag":"[Kurzes Merkmal]"},{"name":"[Nische 2]","description":"[2 Sätze]","potential":"Hoch","tag":"[Merkmal]"},{"name":"[Nische 3]","description":"[2 Sätze]","potential":"Mittel","tag":"[Merkmal]"}],"positioning":"[2-3 Sätze Positionierung auf ${answers.q4} für ${answers.q1}]","contentIdeas":["[Content-Idee 1 für ${answers.q1}]","[Idee 2]","[Idee 3]","[Idee 4]","[Idee 5]","[Idee 6]","[Idee 7]","[Idee 8]","[Idee 9]","[Idee 10]","[Idee 11]","[Idee 12]","[Idee 13]","[Idee 14]","[Idee 15]"],"hooks":"1. [Konkreter Hook für ${answers.q1}]\\n2. [Hook]\\n3. [Hook]\\n4. [Hook]\\n5. [Hook]"}`;
+Antworte mit genau diesem JSON (keine Backticks, kein Text außenrum):
+{"niches":[{"name":"[Nische aus ${answers.q1} für ${answers.q3}]","description":"[Warum diese ${answers.q1}-Nische für ${answers.q3} perfekt passt]","potential":"Hoch","tag":"[Merkmal]"},{"name":"[Zweite ${answers.q1}-Nische]","description":"[2 Sätze]","potential":"Hoch","tag":"[Merkmal]"},{"name":"[Dritte ${answers.q1}-Nische]","description":"[2 Sätze]","potential":"Mittel","tag":"[Merkmal]"}],"positioning":"[Wie du dich auf ${answers.q4} mit ${answers.q1} für ${answers.q3} positionierst]","contentIdeas":["[${answers.q1}-Idee 1 für ${answers.q3}]","[Idee 2]","[Idee 3]","[Idee 4]","[Idee 5]","[Idee 6]","[Idee 7]","[Idee 8]","[Idee 9]","[Idee 10]","[Idee 11]","[Idee 12]","[Idee 13]","[Idee 14]","[Idee 15]"],"hooks":"1. [Hook für ${answers.q1} auf ${answers.q4}]\n2. [Hook]\n3. [Hook]\n4. [Hook]\n5. [Hook]"}`;
 
   try {
     const response = await fetch("/.netlify/functions/claude", {
