@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KI-Nischen & Content Agent</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a26;
-    --border: #2a2a3e;
-    --accent: #6c63ff;
-    --accent2: #ff6584;
-    --accent3: #43e97b;
-    --text: #f0f0f8;
-    --muted: #7070a0;
-    --card: #15151f;
+    --bg: #faf7f2;
+    --surface: #ffffff;
+    --surface2: #f5efe8;
+    --border: #e8ddd2;
+    --accent: #c4704a;
+    --accent2: #8b5e3c;
+    --accent3: #6b8f6b;
+    --text: #2d2420;
+    --muted: #8b7355;
+    --card: #ffffff;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,15 +29,13 @@
     overflow-x: hidden;
   }
 
-  /* Animated background */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(108,99,255,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(255,101,132,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 60% 40%, rgba(67,233,123,0.05) 0%, transparent 70%);
+      radial-gradient(ellipse 60% 50% at 20% 10%, rgba(196,112,74,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(139,94,60,0.05) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -61,9 +59,9 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(108,99,255,0.15);
-    border: 1px solid rgba(108,99,255,0.3);
-    color: #a89fff;
+    background: rgba(196,112,74,0.1);
+    border: 1px solid rgba(196,112,74,0.3);
+    color: var(--accent);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -81,15 +79,12 @@
   }
 
   h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 800;
-    line-height: 1.15;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.2;
     margin-bottom: 14px;
-    background: linear-gradient(135deg, #f0f0f8 0%, #a89fff 50%, #ff6584 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text);
   }
 
   .subtitle {
@@ -148,14 +143,14 @@
 
   .progress-step.active .step-circle {
     border-color: var(--accent);
-    background: rgba(108,99,255,0.2);
+    background: rgba(196,112,74,0.12);
     color: var(--accent);
-    box-shadow: 0 0 20px rgba(108,99,255,0.3);
+    box-shadow: 0 0 16px rgba(196,112,74,0.2);
   }
 
   .progress-step.done .step-circle {
     border-color: var(--accent3);
-    background: rgba(67,233,123,0.15);
+    background: rgba(107,143,107,0.15);
     color: var(--accent3);
   }
 
@@ -179,10 +174,11 @@
     padding: 32px;
     margin-bottom: 20px;
     animation: fadeUp 0.5s ease both;
+    box-shadow: 0 2px 20px rgba(196,112,74,0.06);
   }
 
   .card-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 6px;
@@ -207,7 +203,7 @@
   }
 
   .q-text {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 20px;
     font-weight: 700;
     color: var(--text);
@@ -231,14 +227,14 @@
   }
 
   .option:hover {
-    border-color: rgba(108,99,255,0.5);
-    background: rgba(108,99,255,0.07);
+    border-color: rgba(196,112,74,0.5);
+    background: rgba(196,112,74,0.06);
     transform: translateX(4px);
   }
 
   .option.selected {
     border-color: var(--accent);
-    background: rgba(108,99,255,0.12);
+    background: rgba(196,112,74,0.08);
   }
 
   .option-letter {
@@ -286,6 +282,8 @@
 
   textarea:focus, input[type="text"]:focus {
     border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(196,112,74,0.1);
   }
 
   textarea::placeholder, input::placeholder { color: var(--muted); }
@@ -307,16 +305,16 @@
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #8b85ff);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
     color: white;
-    box-shadow: 0 8px 32px rgba(108,99,255,0.3);
+    box-shadow: 0 8px 24px rgba(196,112,74,0.25);
     width: 100%;
     justify-content: center;
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(108,99,255,0.4);
+    box-shadow: 0 12px 32px rgba(196,112,74,0.35);
   }
 
   .btn-primary:disabled {
@@ -354,7 +352,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
   }
 
   .ai-label {
@@ -424,7 +422,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 15px;
     font-weight: 700;
   }
@@ -486,9 +484,9 @@
     border-radius: 100px;
     font-size: 11px;
     font-weight: 600;
-    background: rgba(108,99,255,0.15);
-    color: #a89fff;
-    border: 1px solid rgba(108,99,255,0.2);
+    background: rgba(196,112,74,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(196,112,74,0.2);
   }
 
   /* Content ideas */
@@ -520,8 +518,8 @@
 
   /* CTA Banner */
   .cta-banner {
-    background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(255,101,132,0.1));
-    border: 1px solid rgba(108,99,255,0.3);
+    background: linear-gradient(135deg, rgba(196,112,74,0.1), rgba(139,94,60,0.08));
+    border: 1px solid rgba(196,112,74,0.25);
     border-radius: 20px;
     padding: 32px;
     text-align: center;
@@ -560,19 +558,19 @@
     border-radius: 12px;
     border: none;
     cursor: pointer;
-    font-family: 'Syne', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     color: white;
-    box-shadow: 0 8px 32px rgba(108,99,255,0.35);
+    box-shadow: 0 8px 24px rgba(196,112,74,0.3);
     transition: all 0.2s;
     text-decoration: none;
   }
 
   .btn-cta:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 48px rgba(108,99,255,0.45);
+    box-shadow: 0 16px 40px rgba(196,112,74,0.4);
   }
 
   /* Animations */
