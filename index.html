@@ -907,7 +907,10 @@
           <a href="https://www.amazon.de/dp/B0H2RWRMY9" target="_blank" class="btn-cta">📖 Buch jetzt für 29,99 € auf Amazon →</a>
         </div>
 
-        <button class="restart-btn" onclick="restartAgent()">↺ Neu starten</button>
+        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+          <button class="restart-btn" onclick="restartAgent()">↺ Neu starten</button>
+          <button class="restart-btn" onclick="downloadPDF()" style="color:var(--accent);border-color:var(--accent);">⬇ Als PDF herunterladen</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1093,6 +1096,85 @@ function renderFallback() {
     '3. "Niemand spricht darüber: [überraschende Aussage über deine Nische]"\n' +
     '4. "Ich habe [Zeitraum] gebraucht um das zu lernen — du brauchst nur 60 Sekunden"\n' +
     '5. "Stopp — wenn du [Zielgruppen-Problem] hast, schau dir das an"';
+}
+
+function downloadPDF() {
+  // Sammle alle Inhalte
+  const niches = Array.from(document.querySelectorAll('.niche-card')).map(c => {
+    const name = c.querySelector('.niche-name')?.textContent?.replace('🎯 ','') || '';
+    const desc = c.querySelector('.niche-desc')?.textContent || '';
+    const tag = c.querySelector('.niche-tag')?.textContent || '';
+    return `${name}\n${desc}\nMerkmal: ${tag}`;
+  }).join('\n\n');
+
+  const positioning = document.getElementById('posBody')?.textContent || '';
+  const ideas = Array.from(document.querySelectorAll('.idea-text')).map((el,i) => `${i+1}. ${el.textContent}`).join('\n');
+  const hooks = document.getElementById('hookBody')?.textContent || '';
+
+  const content = `DEINE NISCHEN-ANALYSE
+=====================
+
+DEINE TOP-3 NISCHEN
+-------------------
+${niches}
+
+DEINE POSITIONIERUNG
+--------------------
+${positioning}
+
+CONTENT-IDEEN
+-------------
+${ideas}
+
+HOOK-FORMELN
+------------
+${hooks}
+
+---------------------
+Erstellt mit nische-content-strategie.netlify.app
+`;
+
+  // Erstelle PDF via Print
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Meine Nischen-Analyse</title>
+      <style>
+        body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #1a1a2e; line-height: 1.6; }
+        h1 { color: #4f9ef8; border-bottom: 2px solid #4f9ef8; padding-bottom: 10px; }
+        h2 { color: #2d7dd2; margin-top: 30px; }
+        .nische { background: #f5f8ff; border-left: 4px solid #4f9ef8; padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .nische-name { font-weight: bold; font-size: 16px; margin-bottom: 5px; }
+        pre { white-space: pre-wrap; font-family: Arial, sans-serif; }
+        .footer { margin-top: 40px; color: #888; font-size: 12px; border-top: 1px solid #eee; padding-top: 15px; }
+        @media print { body { padding: 20px; } }
+      </style>
+    </head>
+    <body>
+      <h1>🎯 Meine Nischen-Analyse</h1>
+      <h2>Top-3 Nischen</h2>
+      ${Array.from(document.querySelectorAll('.niche-card')).map(c => `
+        <div class="nische">
+          <div class="nische-name">${c.querySelector('.niche-name')?.textContent || ''}</div>
+          <div>${c.querySelector('.niche-desc')?.textContent || ''}</div>
+          <small><strong>${c.querySelector('.niche-tag')?.textContent || ''}</strong></small>
+        </div>
+      `).join('')}
+      <h2>Deine Positionierung</h2>
+      <p>${positioning}</p>
+      <h2>Content-Ideen</h2>
+      <pre>${ideas}</pre>
+      <h2>Hook-Formeln</h2>
+      <pre>${hooks}</pre>
+      <div class="footer">Erstellt mit nische-content-strategie.netlify.app</div>
+    </body>
+    </html>
+  `);
+  printWindow.document.close();
+  setTimeout(() => { printWindow.print(); }, 500);
 }
 
 function restartAgent() {
